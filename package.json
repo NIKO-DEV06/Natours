@@ -6,6 +6,7 @@
   "scripts": {
     "start": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
+    "debug": "node --inspect server.js",
     "lint": "eslint --ext .js --ignore-path .gitignore ."
   },
   "author": "Emmanuel Ayeniko",
