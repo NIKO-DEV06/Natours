@@ -11,6 +11,8 @@
         "packageDir": "./"
       }
     ],
+    "arrow-body-style": ["off", "always"],
+    "no-param-reassign": "off",
     "prefer-arrow-callback": "off",
     "prefer-object-spread": "off",
     "prettier/prettier": ["error"],
