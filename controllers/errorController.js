@@ -6,7 +6,11 @@ const handleCastErrorDB = (err) => {
 };
 
 const handleDuplicateFieldDB = (err) => {
-  const message = `Duplicate field value: x. Please use another value!`;
+  const value = err.keyValue.name;
+  //   console.log(err);
+  //   console.log(value);
+  const message = `Duplicate field value: ${value}. Please use another value!`;
+  return new AppError(message, 400);
 };
 
 const sendErrorDev = (err, res) => {
@@ -29,7 +33,7 @@ const sendErrorProduction = (err, res) => {
     // Programming or other unknown error: don't leakk error details
   } else {
     // 1) Log error
-    console.log(err.isOperational);
+
     console.error("ERROR 💥", err);
     // 2) Send generic message
     res.status(500).json({
@@ -49,7 +53,7 @@ module.exports = (err, req, res, next) => {
     let error = { ...err };
 
     if (error.kind === "ObjectId") error = handleCastErrorDB(error);
-    if (error.code === "11000") error = handleDuplicateFieldDB(error);
+    if (error.code === 11000) error = handleDuplicateFieldDB(error);
 
     sendErrorProduction(error, res);
   }
